@@ -46,7 +46,7 @@ static std::vector<std::string> split(std::string const &str, const char delim) 
 const wchar_t *GetIniFilePath(const NppData *nppData) {
 	static wchar_t iniPath[MAX_PATH];
 	SendMessage(nppData->_nppHandle, NPPM_GETPLUGINSCONFIGDIR, MAX_PATH, (LPARAM)iniPath);
-	wcscat_s(iniPath, MAX_PATH, L"\\ElasticTabstops.ini");
+	wcscat_s(iniPath, MAX_PATH, L"\\StretchyTabs.ini");
 	return iniPath;
 }
 
@@ -89,8 +89,13 @@ void ConfigLoad(const NppData *nppData, Configuration *config) {
 
 			// The above could fail or the user types something crazy
 			if (config->min_padding > 256) config->min_padding = 256;
-			if (config->min_padding == 0) config->min_padding = 1;
+			if (config->min_padding == 0) config->min_padding = 2;
 		}
+		else if (strncmp(line, "match_all_tabs_in_block ", 24) == 0) {
+			char* c = line + 24;
+			while (isspace(*c)) c++;
+			config->match_all_tabs_in_block = strncmp(c, "true", 4) == 0;
+		} 
 		else if (strncmp(line, "convert_leading_tabs_to_spaces ", 31) == 0) {
 			char *c = &line[31];
 			while (isspace(*c)) c++;
@@ -107,14 +112,14 @@ void ConfigSave(const NppData *nppData, const Configuration *config) {
 	FILE *file = _wfopen(iniPath, L"w");
 	if (file == nullptr) return;
 
-	fputs("; Configuration for ElasticTabstops.\n; Saving this file will immediately apply the settings.\n\n", file);
+	fputs("; Configuration for StretchyTabs.\n; Saving this file will immediately apply the settings.\n\n", file);
 
 	// Whether or not it is enabled
-	fputs("; Whether elastic tabstops are enabled or not: true or false\n", file);
+	fputs("; Whether stretchy tabs are enabled or not: true or false\n", file);
 	fprintf(file, "enabled %s\n\n", config->enabled == true ? "true" : "false");
 
 	// The file extensions to appy it to
-	fputs("; File extensions to apply elastic tabstops. For example...\n", file);
+	fputs("; File extensions to apply stretchy tabs. For example...\n", file);
 	fputs(";   \"extensions *\" will apply it to all files\n", file);
 	fputs(";   \"extensions .c .h .cpp .hpp\" will apply it to only C/C++ files\n", file);
 	fputs(";   \"extensions !.txt !.py *\" will apply it to all files except for text and Python files\n", file);
@@ -126,6 +131,10 @@ void ConfigSave(const NppData *nppData, const Configuration *config) {
 	// Minimum padding
 	fputs("; Minimum padding in characters. Must be > 0\n", file);
 	fprintf(file, "padding %Iu\n\n", config->min_padding);
+
+	// Match all tabs in block
+	fputs("; Match all tabs in blocks with variable number of tabs: true or false\n", file);
+	fprintf(file, "match_all_tabs_in_block %s\n\n", config->match_all_tabs_in_block == true ? "true" : "false");
 
 	// Leading tabs
 	fputs("; Convert leading tabs to spaces: true or false\n", file);

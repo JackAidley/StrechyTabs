@@ -83,10 +83,16 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>$(ProjectName)</TargetName>
+    <TargetName>StretchyTabs</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetName>$(ProjectName)</TargetName>
+    <TargetName>StretchyTabs</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>StretchyTabs</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetName>StretchyTabs</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -105,7 +111,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName).dll</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -139,7 +145,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName).dll</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -149,9 +155,9 @@
       <ImportLibrary>$(OutDir)$(ProjectName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>if EXIST "%PROGRAMFILES%\Notepad++\plugins\" (
-  mkdir "%PROGRAMFILES%\Notepad++\plugins\$(TargetName)"
-  copy "$(TargetPath)" "%PROGRAMFILES%\Notepad++\plugins\$(TargetName)"
+      <Command>if EXIST "%PROGRAMW6432%\Notepad++\plugins\" (
+  mkdir "%PROGRAMW6432%\Notepad++\plugins\$(TargetName)"
+  copy "$(TargetPath)" "%PROGRAMW6432%\Notepad++\plugins\$(TargetName)"
 )</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -168,7 +174,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName).dll</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
@@ -197,7 +203,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName).dll</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>

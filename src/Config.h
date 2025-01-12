@@ -27,9 +27,13 @@ typedef struct Configuration{
 	bool enabled;
 	std::vector<std::string> file_extensions;
 	size_t min_padding;
+	bool match_all_tabs_in_block;
 	bool convert_leading_tabs_to_spaces;
 }Configuration;
 
+// Get access to the global configuration from anywhere
+// JA: This is actually defined in Main.cpp for historic reasons
+Configuration* GetConfig();
 const wchar_t *GetIniFilePath(const NppData *nppData);
 void ConfigLoad(const NppData *nppData, Configuration *config);
 void ConfigSave(const NppData *nppData, const Configuration *config);

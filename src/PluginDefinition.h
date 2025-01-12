@@ -22,4 +22,4 @@
 
 #define SCI_UNUSED 0
 
-const wchar_t NPP_PLUGIN_NAME[] = TEXT("Elastic Tabstops");
+const wchar_t NPP_PLUGIN_NAME[] = TEXT("StretchyTabs");

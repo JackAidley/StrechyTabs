@@ -1,5 +1,8 @@
-# A new version of ElasticTabstops for Notepad++ is being officially maintained here: https://github.com/mariusv-github/ElasticTabstops
+## StretchyTabs
 
+A fork of ElasticTabstops by Justin Dailey (https://github.com/dail8859/ElasticTabstops) version 1.4 created because behavioural changes in the official 1.5 version developed by Marius Vasiliu (https://github.com/mariusv-github/ElasticTabstops) don't match my personal preferences.
+
+This version, as well as reverting these changes, introduces a minimum length for tabs and introduces an increased window for matching tabs so that tabs in blocks containing a mixed number of tabs will align with each other.
 
 ## License
 This code is released under the [GNU General Public License version 2](http://www.gnu.org/licenses/gpl-2.0.txt).

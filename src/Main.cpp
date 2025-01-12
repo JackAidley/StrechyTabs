@@ -28,7 +28,10 @@
 
 static HANDLE _hModule;
 static NppData nppData;
-static Configuration config = { true, {"*"}, 1, false };
+static Configuration config = { true, {"*"}, 2, true, false };
+
+// Global configuration access function
+Configuration* GetConfig() { return &config; }
 
 // Helper functions
 static HWND getCurrentScintilla();

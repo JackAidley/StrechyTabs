@@ -33,7 +33,7 @@ INT_PTR CALLBACK abtDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 		case WM_INITDIALOG:
 			ConvertStaticToHyperlink(hwndDlg, IDC_GITHUB);
 			ConvertStaticToHyperlink(hwndDlg, IDC_README);
-			Edit_SetText(GetDlgItem(hwndDlg, IDC_VERSION), TEXT("Elastic Tabstops v") VERSION_TEXT TEXT(" ") VERSION_STAGE TEXT(" ") BITNESS);
+			Edit_SetText(GetDlgItem(hwndDlg, IDC_VERSION), TEXT("Stretchy Tabs v") VERSION_TEXT TEXT(" ") VERSION_STAGE TEXT(" ") BITNESS);
 			return true;
 		case WM_COMMAND:
 			switch(LOWORD(wParam)) {
@@ -41,7 +41,7 @@ INT_PTR CALLBACK abtDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 					DestroyWindow(hwndDlg);
 					return true;
 				case IDC_GITHUB:
-					ShellExecute(hwndDlg, TEXT("open"), TEXT("https://github.com/dail8859/ElasticTabstops/"), NULL, NULL, SW_SHOWNORMAL);
+					ShellExecute(hwndDlg, TEXT("open"), TEXT("https://github.com/JackAidley/StrechyTabs"), NULL, NULL, SW_SHOWNORMAL);
 					return true;
 			}
 		case WM_DESTROY:

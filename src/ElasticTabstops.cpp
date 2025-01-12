@@ -183,6 +183,8 @@ static void measure_cells(std::vector<std::vector<et_tabstop>> &grid, int start_
 }
 
 static void stretch_cells(std::vector<std::vector<et_tabstop>> &grid, size_t start_cell, size_t max_tabs) {
+	Configuration* config = GetConfig();
+
 	// Find columns blocks and stretch to fit the widest cell
 	for (size_t t = start_cell; t < max_tabs; t++) {
 		bool starting_new_block = true;
@@ -202,8 +204,25 @@ static void stretch_cells(std::vector<std::vector<et_tabstop>> &grid, size_t sta
 				}
 			}
 			else {
-				// end column block
-				starting_new_block = true;
+				if (config->match_all_tabs_in_block) {
+					if (t < grid[first_line_in_block].size()) {
+						// JA: Only end column block when we have no tabs or no tabs with text inside
+						bool noNonEmpty = true;
+						for (size_t emptyTest = 0; emptyTest < grid[l].size(); ++emptyTest) {
+							if (grid[l][emptyTest].text_width_pix != 0) {
+								noNonEmpty = false;
+								break;
+							}
+						}
+						if (noNonEmpty)
+							starting_new_block = true;
+					} else {
+						// JA: But start of column block must be wide enough for this tab
+						starting_new_block = true;
+					}
+				} else {
+					starting_new_block = true;
+				}
 			}
 		}
 	}
